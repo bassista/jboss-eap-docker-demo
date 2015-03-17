@@ -95,7 +95,11 @@ fi
 rm $basedir/images/eap/simpledemo.war
 rm $basedir/images/eap/$EAP_INSTALL
 
-echo Done with installation, now to run type docker-compose -d up
+echo Done with installation, now to run type docker-compose up -d
+echo 
+echo scale the app by runnning docker-compose scale jbosseap=10, where 10 is the number of instances to create
+echo
+
 
 
 

@@ -1,9 +1,4 @@
-##########################################################################
-#                                                                        #
-# Creates a base image from JBOSS base (based on Fedora 20 and OpenJDK)  #
-#                                                                        #
-##########################################################################
-FROM jboss/base-jdk:7
+FROM rhel7eapbasejdk
 
 MAINTAINER Thomas Qvarnstrom <tqvarnst@redhat.com>
 
@@ -22,6 +17,8 @@ RUN /opt/jboss/jboss-eap-${EAP_VERSION}/bin/add-user.sh admin admin-123 --silent
 
 
 ADD ./simpledemo.war /opt/jboss/jboss-eap-${EAP_VERSION}/standalone/deployments/
+
+RUN sed -i "s/enable-welcome-root=\"true\"/enable-welcome-root=\"false\"/g" /opt/jboss/jboss-eap-${EAP_VERSION}/standalone/configuration/standalone.xml
 
 #ENV JAVA_OPTS "-Xms128m -Xmx128m -XX:MaxNewSize=96m -XX:MaxPermSize=96m -Dorg.apache.tomcat.util.LOW_MEMORY=true -Djava.net.preferIPv4Stack=true"
 
