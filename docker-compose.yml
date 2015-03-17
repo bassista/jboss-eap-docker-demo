@@ -1,9 +1,3 @@
-rhel7eapbase:
-  build: images/rhel7eapbase
-  
-rhel7eapbasejdk:
-  build: images/rhel7eapbase-jdk
-  
 jbosseap:
   build: images/eap
   ports:
