@@ -1,0 +1,7 @@
+docker-build.log
+installs/jboss-eap-6.3.0.zip
+projects/simpledemo/.project
+projects/simpledemo/.classpath
+projects/simpledemo/.settings/org.eclipse.jdt.core.prefs
+projects/simpledemo/.settings/org.eclipse.m2e.core.prefs
+projects/simpledemo/.settings/org.eclipse.wst.validation.prefs

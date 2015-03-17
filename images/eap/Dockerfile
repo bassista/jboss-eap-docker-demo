@@ -1,0 +1,34 @@
+##########################################################################
+#                                                                        #
+# Creates a base image from JBOSS base (based on Fedora 20 and OpenJDK)  #
+#                                                                        #
+##########################################################################
+FROM jboss/base-jdk:7
+
+MAINTAINER Thomas Qvarnstrom <tqvarnst@redhat.com>
+
+ENV EAP_VERSION 6.3.0
+
+ADD ./jboss-eap-${EAP_VERSION}.zip /tmp/
+
+USER jboss
+
+RUN /usr/bin/unzip -q /tmp/jboss-eap-${EAP_VERSION}.zip -d /opt/jboss
+
+## Fix for the fact that base dir doesn't match the current version.
+RUN mv /opt/jboss/jboss-eap-* /opt/jboss/jboss-eap-${EAP_VERSION} 
+
+RUN /opt/jboss/jboss-eap-${EAP_VERSION}/bin/add-user.sh admin admin-123 --silent
+
+
+ADD ./simpledemo.war /opt/jboss/jboss-eap-${EAP_VERSION}/standalone/deployments/
+
+#ENV JAVA_OPTS "-Xms128m -Xmx128m -XX:MaxNewSize=96m -XX:MaxPermSize=96m -Dorg.apache.tomcat.util.LOW_MEMORY=true -Djava.net.preferIPv4Stack=true"
+
+# Set the Java Opts
+ENV JAVA_OPTS -Xms128m -Xmx128m -XX:MaxNewSize=96m -XX:MaxPermSize=96m -Dorg.apache.tomcat.util.LOW_MEMORY=true
+
+#Force the JAva Opts to be preseved (e.g. not changed by standalone.sh)
+ENV PRESERVE_JAVA_OPTS true
+
+CMD /opt/jboss/jboss-eap-${EAP_VERSION}/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0

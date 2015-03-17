@@ -1,0 +1,4 @@
+jbosseap:
+  build: images/eap
+  ports:
+   - "8080"
