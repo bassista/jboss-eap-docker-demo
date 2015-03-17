@@ -3,7 +3,7 @@ basedir=`dirname $0`
 
 
 DEMO="JBoss EAP Docker demo"
-AUTHORS="Thomas Qvarnstrom, Red Hat & Christina Lin, Red Hat"
+AUTHORS="Thomas Qvarnstrom, Red Hat"
 SRC_DIR=$basedir/installs
 
 EAP_INSTALL=jboss-eap-6.3.0.zip
