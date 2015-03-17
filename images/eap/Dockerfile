@@ -1,4 +1,4 @@
-FROM rhel7eapbasejdk
+FROM jbosseapdockerdemo_rhel7eapbasejdk
 
 MAINTAINER Thomas Qvarnstrom <tqvarnst@redhat.com>
 

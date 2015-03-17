@@ -1,4 +1,4 @@
-FROM rhel7eapbase
+FROM jbosseapdockerdemo_rhel7eapbase
 MAINTAINER Marek Goldmann <mgoldman@redhat.com>
 
 # User root user to install software
