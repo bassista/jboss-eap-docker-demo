@@ -1,5 +1,5 @@
 FROM jbosseapdockerdemo_rhel7eapbase
-MAINTAINER Marek Goldmann <mgoldman@redhat.com>
+MAINTAINER Thomas Qvarnstrom <tqvarnst@redhat.com>
 
 # User root user to install software
 USER root
