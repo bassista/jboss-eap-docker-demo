@@ -84,13 +84,27 @@ echo
 cp -f $basedir/projects/simpledemo/target/simpledemo.war $basedir/images/eap/
 cp -f $SRC_DIR/$EAP_INSTALL $basedir/images/eap/
 
-docker-compose -p demo -f docker-compose-build.yml build > docker-build.log 2>&1
-
+docker-compose -p demo -f docker-compose-build.yml build base > docker-build-base.log 2>&1
 if [ $? -ne 0 ]; then
-	echo "There was an error building the EAP image, please check docker-build.log"
+	echo "There was an error building the EAP image, please check docker-build-base.log"
 	echo
 	exit 4
 fi
+
+docker-compose -p demo -f docker-compose-build.yml build basejdk > docker-build-basejdk.log 2>&1
+if [ $? -ne 0 ]; then
+	echo "There was an error building the EAP image, please check docker-build-basejdk.log"
+	echo
+	exit 4
+fi
+
+docker-compose -p demo -f docker-compose-build.yml build jbosseap > docker-build-jbosseap.log 2>&1
+if [ $? -ne 0 ]; then
+	echo "There was an error building the EAP image, please check docker-build-jbosseap.log"
+	echo
+	exit 4
+fi
+
 
 rm $basedir/images/eap/simpledemo.war
 rm $basedir/images/eap/$EAP_INSTALL
