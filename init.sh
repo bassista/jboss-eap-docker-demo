@@ -84,7 +84,7 @@ echo
 cp -f $basedir/projects/simpledemo/target/simpledemo.war $basedir/images/eap/
 cp -f $SRC_DIR/$EAP_INSTALL $basedir/images/eap/
 
-docker-compose -f docker-compose-build.yml build > docker-build.log 2>&1
+docker-compose -p demo -f docker-compose-build.yml build > docker-build.log 2>&1
 
 if [ $? -ne 0 ]; then
 	echo "There was an error building the EAP image, please check docker-build.log"
@@ -95,7 +95,7 @@ fi
 rm $basedir/images/eap/simpledemo.war
 rm $basedir/images/eap/$EAP_INSTALL
 
-echo Done with installation, now to run type docker-compose up -d
+echo Done with installation, now to run type docker-compose -p demo up -d
 echo 
 echo scale the app by runnning docker-compose scale jbosseap=10, where 10 is the number of instances to create
 echo

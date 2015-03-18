@@ -1,7 +1,7 @@
-rhel7eapbase:
+base:
   build: images/rhel7eapbase
   
-rhel7eapbasejdk:
+base-jdk:
   build: images/rhel7eapbase-jdk
   
 jbosseap:

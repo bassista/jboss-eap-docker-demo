@@ -1,4 +1,4 @@
-FROM jbosseapdockerdemo_rhel7eapbase
+FROM demo_base
 MAINTAINER Thomas Qvarnstrom <tqvarnst@redhat.com>
 
 # User root user to install software
