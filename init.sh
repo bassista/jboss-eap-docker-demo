@@ -74,11 +74,11 @@ fi
 
 # Build the project
 pushd $basedir/projects/simpledemo > /dev/null
-echo - building the simepldemo project
+echo - building the simpledemo project
 mvn clean package > /dev/null
 popd > /dev/null
 
-echo - Building Docker images
+echo - building Docker images
 echo 
 
 cp -f $basedir/projects/simpledemo/target/simpledemo.war $basedir/images/eap/
