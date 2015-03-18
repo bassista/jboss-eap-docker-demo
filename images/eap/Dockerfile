@@ -23,7 +23,8 @@ RUN sed -i "s/enable-welcome-root=\"true\"/enable-welcome-root=\"false\"/g" /opt
 #ENV JAVA_OPTS "-Xms128m -Xmx128m -XX:MaxNewSize=96m -XX:MaxPermSize=96m -Dorg.apache.tomcat.util.LOW_MEMORY=true -Djava.net.preferIPv4Stack=true"
 
 # Set the Java Opts
-ENV JAVA_OPTS -Xms128m -Xmx128m -XX:MaxNewSize=96m -XX:MaxPermSize=96m -Dorg.apache.tomcat.util.LOW_MEMORY=true
+ENV JAVA_OPTS -client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none -Xms64m -Xmx256m -Dorg.apache.tomcat.util.LOW_MEMORY=true -XX:+UseCompressedOops -XX:+AggressiveOpts -XX:+DisableExplicitGC -Djava.net.preferIPv4Stack=true
+#ENV JAVA_OPTS -XX:+DoEscapeAnalysis -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:+ExplicitGCInvokesConcurrent -XX:CMSInitiatingOccupancyFraction=80 -XX:CMSIncrementalSafetyFactor=20 -XX:+UseCMSInitiatingOccupancyOnly -Xmx256M -Xms256M -XX:+AggressiveOpts -Dorg.apache.tomcat.util.LOW_MEMORY=true
 
 #Force the JAva Opts to be preseved (e.g. not changed by standalone.sh)
 ENV PRESERVE_JAVA_OPTS true
