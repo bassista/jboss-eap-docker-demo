@@ -2,16 +2,31 @@ FROM demo_basejdk
 
 MAINTAINER Thomas Qvarnstrom <tqvarnst@redhat.com>
 
-ENV EAP_VERSION 6.3.0
+USER root
 
-ADD ./jboss-eap-${EAP_VERSION}.zip /tmp/
+rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+
+yum install -y puppet
 
 USER jboss
 
+ENV EAP_VERSION 6.3.0
+
+ENV EAP_PATCH_VERSION 6.3.3
+
+ADD ./jboss-eap-${EAP_VERSION}.zip /tmp/
+
+ADD ./jboss-eap-${EAP_VERSION}-patch.zip /tmp/
+
+
+
 RUN /usr/bin/unzip -q /tmp/jboss-eap-${EAP_VERSION}.zip -d /opt/jboss
+
+RUN rm /tmp/jboss-eap-${EAP_VERSION}.zip
 
 ## Fix for the fact that base dir doesn't match the current version.
 RUN mv /opt/jboss/jboss-eap-* /opt/jboss/jboss-eap-${EAP_VERSION} 
+
 
 RUN /opt/jboss/jboss-eap-${EAP_VERSION}/bin/add-user.sh admin admin-123 --silent
 
