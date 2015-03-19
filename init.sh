@@ -7,8 +7,9 @@ AUTHORS="Thomas Qvarnstrom, Red Hat"
 SRC_DIR=$basedir/installs
 
 EAP_INSTALL=jboss-eap-6.3.0.zip
+EAP_PATCH=jboss-eap-6.3.3-patch.zip
 
-SOFTWARE=($EAP_INSTALL)
+SOFTWARE=($EAP_INSTALL $EAP_PATCH)
 
 
 # wipe screen.
@@ -55,21 +56,22 @@ if [[ ! -d $SRC_DIR ]]; then
 fi
 
 # Verify that necesary files are downloaded
-
-if [[ -r $SRC_DIR/$EAP_INSTALL || -L $SRC_DIR/$EAP_INSTALL ]]; then
-		echo $EAP_INSTALL are present...
+for DONWLOAD in ${DOWNLOADS[@]}
+do
+	if [[ -r $SRC_DIR/$DONWLOAD || -L $SRC_DIR/$DONWLOAD ]]; then
+		echo $DONWLOAD are present...
 		echo
-elif [[ -r ~/software/$EAP_INSTALL || -L $SRC_DIR/$EAP_INSTALL ]]; then
+	elif [[ -r ~/software/$DONWLOAD || -L $SRC_DIR/$DONWLOAD ]]; then
 		echo  - $DOWNLOAD found in shared directory copying it to local install...
 		echo
-		cp ~/software/$EAP_INSTALL $SRC_DIR
-
-else
-		echo You need to download $EAP_INSTALL from the Customer Support Portal 
+		cp ~/software/$DONWLOAD $SRC_DIR
+	else
+		echo You need to download $DONWLOAD from the Customer Support Portal 
 		echo and place it in the $SRC_DIR directory or ~/software/ to proceed...
 		echo
 		exit 3
-fi
+	fi
+done
 
 
 # Build the project
@@ -83,6 +85,7 @@ echo
 
 cp -f $basedir/projects/simpledemo/target/simpledemo.war $basedir/images/eap/
 cp -f $SRC_DIR/$EAP_INSTALL $basedir/images/eap/
+cp -f $SRC_DIR/$EAP_PATCH $basedir/images/eap/
 
 docker-compose -p demo -f docker-compose-build.yml build base > docker-build-base.log 2>&1
 if [ $? -ne 0 ]; then
@@ -108,6 +111,7 @@ fi
 
 rm $basedir/images/eap/simpledemo.war
 rm $basedir/images/eap/$EAP_INSTALL
+rm $basedir/images/eap/$EAP_PATCH
 
 echo Done with installation, now to run type docker-compose -p demo up -d
 echo 
