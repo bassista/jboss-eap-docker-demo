@@ -24,7 +24,9 @@ ADD ./puppet/site.pp /opt/jboss/
 
 RUN /usr/bin/unzip -q /tmp/jboss-eap-${EAP_VERSION}.zip -d /opt/jboss
 
+USER root
 RUN rm /tmp/jboss-eap-${EAP_VERSION}.zip
+USER jboss
 
 ## Fix for the fact that base dir doesn't match the current version.
 RUN mv /opt/jboss/jboss-eap-* /opt/jboss/jboss-eap-${EAP_VERSION} 
@@ -44,6 +46,6 @@ ENV JAVA_OPTS -client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:no
 #Force the JAva Opts to be preseved (e.g. not changed by standalone.sh)
 ENV PRESERVE_JAVA_OPTS true
 
-EXPOST 8080 9990 9999
+EXPOSE 8080 9990 9999
 
 CMD /opt/jboss/jboss-eap-${EAP_VERSION}/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
