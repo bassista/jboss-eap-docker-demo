@@ -9,7 +9,7 @@ SRC_DIR=$basedir/installs
 EAP_INSTALL=jboss-eap-6.3.0.zip
 EAP_PATCH=jboss-eap-6.3.3-patch.zip
 
-SOFTWARE=($EAP_INSTALL $EAP_PATCH)
+DOWNLOADS=($EAP_INSTALL $EAP_PATCH)
 
 
 # wipe screen.

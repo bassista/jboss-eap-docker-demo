@@ -8,7 +8,7 @@ RUN rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 
 RUN yum install -y puppet procps-ng
 
-ADD ./puppet/modules/* /etc/puppet/modules/
+ADD ./puppet/modules /usr/share/puppet/modules/
 
 USER jboss
 
@@ -20,22 +20,16 @@ ADD ./jboss-eap-${EAP_VERSION}.zip /tmp/
 
 ADD ./jboss-eap-${EAP_PATCH_VERSION}-patch.zip /tmp/
 
-
 ADD ./puppet/site.pp /opt/jboss/
 
 RUN /usr/bin/unzip -q /tmp/jboss-eap-${EAP_VERSION}.zip -d /opt/jboss
 
-USER root
 RUN rm /tmp/jboss-eap-${EAP_VERSION}.zip
-
-USER jboss
 
 ## Fix for the fact that base dir doesn't match the current version.
 RUN mv /opt/jboss/jboss-eap-* /opt/jboss/jboss-eap-${EAP_VERSION} 
 
-
 RUN /opt/jboss/jboss-eap-${EAP_VERSION}/bin/add-user.sh admin admin-123 --silent
-
 
 ADD ./simpledemo.war /opt/jboss/jboss-eap-${EAP_VERSION}/standalone/deployments/
 
@@ -49,5 +43,7 @@ ENV JAVA_OPTS -client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:no
 
 #Force the JAva Opts to be preseved (e.g. not changed by standalone.sh)
 ENV PRESERVE_JAVA_OPTS true
+
+EXPOST 8080 9990 9999
 
 CMD /opt/jboss/jboss-eap-${EAP_VERSION}/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
