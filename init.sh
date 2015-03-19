@@ -56,17 +56,17 @@ if [[ ! -d $SRC_DIR ]]; then
 fi
 
 # Verify that necesary files are downloaded
-for DONWLOAD in ${DOWNLOADS[@]}
+for DOWNLOAD in ${DOWNLOADS[@]}
 do
-	if [[ -r $SRC_DIR/$DONWLOAD || -L $SRC_DIR/$DONWLOAD ]]; then
-		echo $DONWLOAD are present...
+	if [[ -r $SRC_DIR/$DOWNLOAD || -L $SRC_DIR/$DOWNLOAD ]]; then
+		echo $DOWNLOAD are present...
 		echo
-	elif [[ -r ~/software/$DONWLOAD || -L $SRC_DIR/$DONWLOAD ]]; then
+	elif [[ -r ~/software/$DOWNLOAD || -L $SRC_DIR/$DOWNLOAD ]]; then
 		echo  - $DOWNLOAD found in shared directory copying it to local install...
 		echo
-		cp ~/software/$DONWLOAD $SRC_DIR
+		cp ~/software/$DOWNLOAD $SRC_DIR
 	else
-		echo You need to download $DONWLOAD from the Customer Support Portal 
+		echo You need to download $DOWNLOAD from the Customer Support Portal 
 		echo and place it in the $SRC_DIR directory or ~/software/ to proceed...
 		echo
 		exit 3
