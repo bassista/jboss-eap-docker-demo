@@ -8,6 +8,8 @@ RUN rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 
 RUN yum install -y puppet procps-ng
 
+ADD ./puppet/modules/* /etc/puppet/modules/
+
 USER jboss
 
 ENV EAP_VERSION 6.3.0
@@ -19,6 +21,7 @@ ADD ./jboss-eap-${EAP_VERSION}.zip /tmp/
 ADD ./jboss-eap-${EAP_PATCH_VERSION}-patch.zip /tmp/
 
 
+ADD ./puppet/site.pp /opt/jboss/
 
 RUN /usr/bin/unzip -q /tmp/jboss-eap-${EAP_VERSION}.zip -d /opt/jboss
 
