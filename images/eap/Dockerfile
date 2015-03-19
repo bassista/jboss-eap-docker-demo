@@ -16,7 +16,7 @@ ENV EAP_PATCH_VERSION 6.3.3
 
 ADD ./jboss-eap-${EAP_VERSION}.zip /tmp/
 
-ADD ./jboss-eap-${EAP_VERSION}-patch.zip /tmp/
+ADD ./jboss-eap-${EAP_PATCH_VERSION}-patch.zip /tmp/
 
 
 
