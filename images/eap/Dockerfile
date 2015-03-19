@@ -22,7 +22,10 @@ ADD ./jboss-eap-${EAP_PATCH_VERSION}-patch.zip /tmp/
 
 RUN /usr/bin/unzip -q /tmp/jboss-eap-${EAP_VERSION}.zip -d /opt/jboss
 
+USER root
 RUN rm /tmp/jboss-eap-${EAP_VERSION}.zip
+
+USER jboss
 
 ## Fix for the fact that base dir doesn't match the current version.
 RUN mv /opt/jboss/jboss-eap-* /opt/jboss/jboss-eap-${EAP_VERSION} 
