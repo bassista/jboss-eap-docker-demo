@@ -5,7 +5,7 @@ MAINTAINER Thomas Qvarnstrom <tqvarnst@redhat.com>
 RUN yum -y update && yum clean all
 
 # Install packages necessary to run EAP
-RUN yum -y install hostname xmlstarlet saxon augeas bsdtar unzip && yum clean all
+RUN yum -y install hostname xmlstarlet saxon augeas bsdtar unzip procps-ng && yum clean all
 
 # Create a user and group used to launch processes
 # The user ID 1000 is the default for the first "regular" user on Fedora/RHEL,
