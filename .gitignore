@@ -12,3 +12,5 @@ projects/simpledemo/.settings/org.eclipse.wst.common.project.facet.core.xml
 projects/simpledemo/.settings/org.eclipse.wst.jsdt.ui.superType.container
 projects/simpledemo/.settings/org.eclipse.wst.jsdt.ui.superType.name
 projects/simpledemo/.tern-project
+workspace
+projects/simpledemo/.settings/org.eclipse.jst.jsp.core.prefs
